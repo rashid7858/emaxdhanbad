@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GWIT - Premier IT Training Institute in Dhanbad offering Website Development, IT Network Support and professional courses">
+    <title>GWIT - Global Web Institute of Technology | IT Training & Services</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f2a4a',
+                        secondary: '#dc2626',
+                        accent: '#2563eb',
+                        light: '#f0f4f8',
+                        dark: '#0a1628'
+                    },
+                    fontFamily: {
+                        display: ['Space Grotesk', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --fg: #0a1628;
+            --muted: #64748b;
+            --accent: #dc2626;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --primary: #0f2a4a;
+            --blue: #2563eb;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            overflow-x: hidden;
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        
+        /* Hero & Backgrounds */
+        .hero-bg {
+            background: linear-gradient(135deg, #0f2a4a 0%, #1e3a5f 50%, #0f2a4a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(220, 38, 38, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
+        .grid-pattern {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        
+        /* Components */
+        .service-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .service-card:hover::before { transform: scaleX(1); }
+        
+        .course-card {
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .course-card .course-image {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-card .course-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0; height: 60%;
+            background: linear-gradient(to top, rgba(15, 42, 74, 0.8), transparent);
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, #b91c1c 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+            border-color: white;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+        
+        .header.scrolled {
+            background: rgba(15, 42, 74, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 80%; max-width: 400px;
+            height: 100vh;
+            background: var(--primary);
+            z-index: 1001;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active { right: 0; }
+        
+        .mobile-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-overlay.active { opacity: 1; visibility: visible; }
+        
+        /* Mobile Dropdown Submenu */
+        .mobile-dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-dropdown-menu.open {
+            max-height: 800px; 
+        }
+        
+        /* Modal & Popups */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 22, 40, 0.9);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .modal-content {
+            background: var(--card);
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+        
+        /* Scrolling Sections */
+        .student-scroll {
+            display: flex;
+            gap: 1.5rem;
+            animation: scrollStudents 30s linear infinite;
+        }
+        .student-scroll:hover { animation-play-state: paused; }
+        
+        @keyframes scrollStudents {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .student-card {
+            flex-shrink: 0;
+            width: 200px;
+            background: var(--card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .student-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* FAQ */
+        .faq-item {
+            background: var(--card);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+        
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover { background: rgba(15, 42, 74, 0.03); }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .faq-item.active .faq-answer { max-height: 500px; }
+        .faq-icon { transition: transform 0.3s ease; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        
+        /* Dropdown */
+        .dropdown { position: relative; }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%; left: 0;
+            background: white;
+            border-radius: 12px;
+            min-width: 220px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.25rem;
+            color: var(--fg);
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-menu a:hover {
+            background: rgba(15, 42, 74, 0.05);
+            color: var(--blue);
+        }
+        
+        /* Forms */
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-input:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+        
+        /* Stats */
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Float Buttons */
+        .float-btn {
+            position: fixed;
+            z-index: 999;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .float-btn:hover { transform: scale(1.1); }
+        .whatsapp-btn { right: 20px; bottom: 100px; background: #25d366; color: white; }
+        .call-btn { left: 20px; bottom: 100px; background: var(--accent); color: white; }
+
+        /* Achievement Cards */
+        .achievement-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .achievement-card:hover { transform: translateY(-10px); }
+        
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+        }
+
+        /* Placed Heroes & Celebration */
+        .placed-hero-card {
+            background: linear-gradient(145deg, #ffffff, #f0f4f8);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .placed-hero-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .celebration-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* India Map Styles */
+        .india-map-container {
+            position: relative;
+        }
+        .map-point {
+            position: absolute;
+            width: 8px; height: 8px;
+            background: #dc2626;
+            border-radius: 50%;
+            animation: mapPulse 2s infinite;
+        }
+        @keyframes mapPulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+
+        /* Focus & Accessibility */
+        *:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 2px;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-secondary to-primary rounded-xl flex items-center justify-center">
+                        <span class="text-white font-display font-bold text-xl">GW</span>
+                    </div>
+                    <div class="hidden sm:block">
+                        <span class="text-white font-display font-bold text-xl">GWIT</span>
+                        <span class="block text-xs text-gray-300">Global Web Institute of Technology</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center gap-6">
+                    <a href="#home" class="text-white hover:text-secondary transition-colors font-medium">Home</a>
+                    <a href="#about" class="text-white hover:text-secondary transition-colors font-medium">About</a>
+                    <a href="#services" class="text-white hover:text-secondary transition-colors font-medium">Services</a>
+                    
+                    <!-- Updated Courses Dropdown -->
+                    <div class="dropdown">
+                        <a href="#courses" class="text-white hover:text-secondary transition-colors font-medium flex items-center gap-1">
+                            Courses
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#courses">All Courses</a>
+                            <div class="border-t border-gray-100 my-1"></div>
+                            <span class="block px-4 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wide">Advanced</span>
+                            <a href="HTML5.html">Web Development</a>
+                            <a href="#courses">Python MySQL</a>
+                            <a href="#courses">CCNA</a>
+                            <a href="#courses">Cloud Computing</a>
+                            <a href="#courses">Artificial Intelligence</a>
+                            <div class="border-t border-gray-100 my-1"></div>
+                            <span class="block px-4 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wide">Basic</span>
+                            <a href="#courses">Hardware</a>
+                            <a href="#courses">Networking</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#enrollment" class="text-white hover:text-secondary transition-colors font-medium">Enrollment</a>
+                    <a href="#contact" class="text-white hover:text-secondary transition-colors font-medium">Contact</a>
+                    
+                    <div class="dropdown">
+                        <span class="text-white hover:text-secondary transition-colors font-medium flex items-center gap-1 cursor-pointer">
+                            LMS
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </span>
+                        <div class="dropdown-menu">
+                            <a href="#admin-login">Admin Login</a>
+                            <a href="#student-login">Student Login</a>
+                        </div>
+                    </div>
+                </nav>
+                
+                <!-- CTA Buttons -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="tel:7858838866" class="flex items-center gap-2 bg-white/10 backdrop-blur text-white px-4 py-2.5 rounded-full hover:bg-white hover:text-primary transition-all font-medium">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        7858838866
+                    </a>
+                    <button onclick="openEnrollModal()" class="btn-primary text-sm">
+                        Enroll Now
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-white p-2" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button onclick="toggleMobileMenu()" class="absolute top-4 right-4 text-white p-2" aria-label="Close menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div class="mt-12">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-12 h-12 bg-gradient-to-br from-secondary to-blue-600 rounded-xl flex items-center justify-center">
+                    <span class="text-white font-display font-bold text-xl">GW</span>
+                </div>
+                <span class="text-white font-display font-bold text-xl">GWIT</span>
+            </div>
+            <nav class="space-y-2">
+                <a href="#home" onclick="toggleMobileMenu()" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors">Home</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors">About</a>
+
+                <a href="#services" onclick="toggleMobileMenu()" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors">Services</a>
+                
+                <!-- Updated Mobile Dropdown for Courses -->
+                <div class="mobile-dropdown">
+                    <button onclick="toggleMobileDropdown(this)" class="w-full flex justify-between items-center text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors">
+                        Courses
+                        <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="mobile-dropdown-menu pl-4 bg-white/5 rounded-lg mt-1">
+                        <a href="#courses" onclick="toggleMobileMenu()" class="block text-gray-300 py-2.5 px-4 hover:text-white transition-colors">All Courses</a>
+                        
+                        <div class="border-t border-white/10 my-2"></div>
+                        <span class="block px-4 py-1 text-xs font-semibold text-gray-400 uppercase">Advanced</span>
+                        <a href="#courses" onclick="toggleMobileMenu()" class="block text-gray-300 py-2.5 px-4 hover:text-white transition-colors">Web Development</a>
+                        <a href="#courses" onclick="toggleMobileMenu()" class="block text-gray-300 py-2.5 px-4 hover:text-white transition-colors">Python MySQL</a>
+                        <a href="#courses" onclick="toggleMobileMenu()" class="block text-gray-300 py-2.5 px-4 hover:text-white transition-colors">CCNA</a>
+                        <a href="#courses" onclick="toggleMobileMenu()" class="block text-gray-300 py-2.5 px-4 hover:text-white transition-colors">Cloud Computing</a>
+                        <a href="#courses" onclick="toggleMobileMenu()" class="block text-gray-300 py-2.5 px-4 hover:text-white transition-colors">Artificial Intelligence</a>
+                        
+                        <div class="border-t border-white/10 my-2"></div>
+                        <span class="block px-4 py-1 text-xs font-semibold text-gray-400 uppercase">Basic</span>
+                        <a href="#courses" onclick="toggleMobileMenu()" class="block text-gray-300 py-2.5 px-4 hover:text-white transition-colors">Hardware</a>
+                        <a href="#courses" onclick="toggleMobileMenu()" class="block text-gray-300 py-2.5 px-4 hover:text-white transition-colors">Networking</a>
+                    </div>
+                </div>
+                
+                <a href="#enrollment" onclick="toggleMobileMenu()" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors">Enrollment</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors">Contact</a>
+                
+                <!-- Mobile Dropdown for LMS -->
+                <div class="mobile-dropdown">
+                    <button onclick="toggleMobileDropdown(this)" class="w-full flex justify-between items-center text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors">
+                        LMS
+                        <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="mobile-dropdown-menu pl-4 bg-white/5 rounded-lg mt-1">
+                        <a href="#admin-login" onclick="toggleMobileMenu()" class="block text-gray-300 py-2.5 px-4 hover:text-white transition-colors">Admin Login</a>
+                        <a href="#student-login" onclick="toggleMobileMenu()" class="block text-gray-300 py-2.5 px-4 hover:text-white transition-colors">Student Login</a>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="mt-8 space-y-3">
+                <a href="tel:7858838866" class="flex items-center justify-center gap-2 bg-white/10 text-white py-3 px-4 rounded-full hover:bg-white/20 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    7858838866
+                </a>
+                <button onclick="openEnrollModal(); toggleMobileMenu();" class="btn-primary w-full justify-center">Enroll Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/917858838866" target="_blank" class="float-btn whatsapp-btn" aria-label="WhatsApp">
+        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a href="tel:7858838866" class="float-btn call-btn" aria-label="Call">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+    </a>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center relative pt-20">
+        <div class="particles" id="particles"></div>
+        <div class="grid-pattern"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="reveal">
+                        <span class="inline-block bg-white/10 backdrop-blur text-white px-4 py-2 rounded-full text-sm font-medium mb-6">Welcome to GWIT Dhanbad</span>
+                    </div>
+                    <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                        Transform Your Future with <span class="text-secondary">IT Excellence</span>
+                    </h1>
+                    <p class="reveal reveal-delay-2 text-gray-300 text-lg mb-8 max-w-xl">Premier IT Training Institute in Dhanbad offering industry-leading courses in Web Development, Networking, Cloud Computing, and Technical Support Services.</p>
+                    <div class="reveal reveal-delay-3 flex flex-wrap gap-4">
+                        <a href="#courses" class="btn-primary">Explore Courses <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+                        <button onclick="openEnrollModal()" class="btn-secondary">Enroll Now</button>
+                    </div>
+                    <div class="reveal reveal-delay-4 mt-10 flex items-center gap-8">
+                        <div><span class="text-3xl font-bold text-white">9500+</span><span class="block text-gray-400 text-sm">Centers in India</span></div>
+                        <div class="w-px h-12 bg-white/20"></div>
+                        <div><span class="text-3xl font-bold text-white">50+</span><span class="block text-gray-400 text-sm">Expert Trainers</span></div>
+                        <div class="w-px h-12 bg-white/20"></div>
+                        <div><span class="text-3xl font-bold text-white">15+</span><span class="block text-gray-400 text-sm">Years Experience</span></div>
+                    </div>
+                </div>
+                <div class="reveal reveal-delay-2 relative hidden lg:block">
+                    <div class="relative">
+                        <div class="absolute -top-10 -left-10 w-72 h-72 bg-secondary/20 rounded-full blur-3xl animate-pulse"></div>
+                        <div class="absolute -bottom-10 -right-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+                        <div class="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-gradient-to-br from-secondary/80 to-secondary rounded-2xl p-6 text-white">
+                                    <svg class="w-10 h-10 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                                    <h3 class="font-display font-semibold">Web Development</h3>
+                                    <p class="text-sm opacity-80">Full Stack Training</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-blue-600/80 to-blue-600 rounded-2xl p-6 text-white">
+                                    <svg class="w-10 h-10 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                                    <h3 class="font-display font-semibold">AI & ML</h3>
+                                    <p class="text-sm opacity-80">Cutting Edge Tech</p>
+                                </div>
+
+                                <div class="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-6 text-white">
+                                    <svg class="w-10 h-10 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    <h3 class="font-display font-semibold">Networking</h3>
+                                    <p class="text-sm opacity-80">CCNA, CCNP Training</p>
+                                </div>
+
+                                <div class="bg-gradient-to-br from-emerald-600/80 to-emerald-600 rounded-2xl p-6 text-white">
+                                    <svg class="w-10 h-10 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                                    <h3 class="font-display font-semibold">Cloud Computing</h3>
+                                    <p class="text-sm opacity-80">AWS, Azure Training</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 animate-bounce">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="reveal inline-block text-secondary font-semibold mb-3">OUR SERVICES</span>
+                <h2 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl font-bold text-primary mb-4">Technical Services We Offer</h2>
+                <p class="reveal reveal-delay-2 text-gray-600 max-w-2xl mx-auto">Comprehensive IT solutions tailored for businesses and individuals.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="reveal service-card">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-3">Website Development</h3>
+                    <p class="text-gray-600 mb-4">Professional website design and development services with modern technologies.</p>
+                    <a href="#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all">Get Service <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+                </div>
+                <!-- Service 2 -->
+                <div class="reveal reveal-delay-1 service-card">
+                    <div class="w-14 h-14 bg-gradient-to-br from-secondary to-red-400 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-3">IT Network Support</h3>
+                    <p class="text-gray-600 mb-4">Complete network infrastructure setup, maintenance, and troubleshooting.</p>
+                    <a href="#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all">Get Service <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+                </div>
+                <!-- Service 3 -->
+                <div class="reveal reveal-delay-2 service-card">
+                    <div class="w-14 h-14 bg-gradient-to-br from-emerald-600 to-emerald-400 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-3">CCTV Installation</h3>
+                    <p class="text-gray-600 mb-4">Security surveillance systems with HD cameras and remote monitoring.</p>
+                    <a href="#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all">Get Service <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+                </div>
+                <!-- Service 4: Hardware Solutions -->
+                <div class="reveal service-card">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-600 to-purple-400 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-3">Hardware Solutions</h3>
+                    <p class="text-gray-600 mb-4">Computer assembly, repair, and upgrade services. Quality hardware components with warranty support.</p>
+                    <a href="#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all">Get Service <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+                </div>
+                <!-- Service 5: Cloud Services -->
+                <div class="reveal reveal-delay-1 service-card">
+                    <div class="w-14 h-14 bg-gradient-to-br from-cyan-600 to-cyan-400 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-3">Cloud Services</h3>
+                    <p class="text-gray-600 mb-4">Cloud migration, setup, and management. AWS, Azure, and Google Cloud solutions for businesses.</p>
+                    <a href="#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all">Get Service <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+                </div>
+                <!-- Service 6: Corporate Training -->
+                <div class="reveal reveal-delay-2 service-card">
+                    <div class="w-14 h-14 bg-gradient-to-br from-amber-500 to-amber-400 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-3">Corporate Training</h3>
+                    <p class="text-gray-600 mb-4">Customized training programs for organizations. Upskill your workforce with industry-relevant IT courses.</p>
+                    <a href="#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all">Get Service <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-20 bg-primary relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="reveal inline-block text-secondary font-semibold mb-3">OUR COURSES</span>
+                <h2 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl font-bold text-white mb-4">Industry-Ready IT Courses</h2>
+                <p class="reveal reveal-delay-2 text-gray-300 max-w-2xl mx-auto">Comprehensive training programs designed to make you job-ready.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="coursesGrid"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="reveal inline-block text-secondary font-semibold mb-3">ABOUT US</span>
+                    <h2 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl font-bold text-primary mb-6">Empowering Future Through Quality IT Education</h2>
+                    <p class="reveal reveal-delay-2 text-gray-600 mb-8">GWIT is a premier IT training institute committed to providing quality education and practical skills.</p>
+                    <div class="reveal reveal-delay-3 space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+                            <div><h3 class="font-display font-semibold text-lg text-primary mb-1">Our Mission</h3><p class="text-gray-600">To bridge the gap between industry requirements and academic knowledge.</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></div>
+                            <div><h3 class="font-display font-semibold text-lg text-primary mb-1">Our Vision</h3><p class="text-gray-600">To become the leading IT education provider in India.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal reveal-delay-2 relative">
+                    <div class="relative">
+                        <div class="absolute -top-8 -left-8 w-full h-full bg-gradient-to-br from-primary to-blue-600 rounded-3xl"></div>
+                        <div class="relative bg-white rounded-3xl p-8 shadow-2xl">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="text-center p-4 bg-gray-50 rounded-2xl"><span class="stat-number">15+</span><p class="text-gray-600 font-medium">Years Experience</p></div>
+                                <div class="text-center p-4 bg-gray-50 rounded-2xl"><span class="stat-number">50+</span><p class="text-gray-600 font-medium">Expert Trainers</p></div>
+                                <div class="text-center p-4 bg-gray-50 rounded-2xl"><span class="stat-number">10K+</span><p class="text-gray-600 font-medium">Students Trained</p></div>
+                                <div class="text-center p-4 bg-gray-50 rounded-2xl"><span class="stat-number">95%</span><p class="text-gray-600 font-medium">Placement Rate</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- E-Max India Section -->
+    <section id="emax" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="reveal inline-block text-secondary font-semibold mb-3">WE ARE E-MAX</span>
+                <h2 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl font-bold text-primary mb-4">Part of India's Largest IT Training Network</h2>
+                <p class="reveal reveal-delay-2 text-gray-600 max-w-2xl mx-auto">GWIT is proud to be associated with E-Max India, having 9500+ centers across the country.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal order-2 lg:order-1">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg text-center">
+                            <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <span class="text-4xl font-bold text-primary">9500+</span>
+                            <p class="text-gray-600 mt-2">Centers Across India</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-2xl shadow-lg text-center">
+                            <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                            </div>
+                            <span class="text-4xl font-bold text-primary">10L+</span>
+                            <p class="text-gray-600 mt-2">Students Enrolled</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-2xl shadow-lg text-center">
+                            <div class="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <span class="text-4xl font-bold text-primary">5L+</span>
+                            <p class="text-gray-600 mt-2">Students Placed</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-2xl shadow-lg text-center">
+                            <div class="w-16 h-16 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                            </div>
+                            <span class="text-4xl font-bold text-primary">100+</span>
+                            <p class="text-gray-600 mt-2">Certified Courses</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal reveal-delay-1 order-1 lg:order-2">
+                    <div class="india-map-container relative">
+                        <svg viewBox="0 0 400 450" class="w-full max-w-md mx-auto">
+                            <!-- Simplified India Map -->
+                            <path d="M200 20 L280 60 L320 120 L340 180 L350 220 L340 280 L320 340 L280 380 L240 400 L200 420 L160 400 L120 380 L80 340 L60 280 L70 220 L80 180 L100 120 L140 60 Z" fill="#e2e8f0" stroke="#0f2a4a" stroke-width="2"/>
+                            <text x="200" y="200" text-anchor="middle" class="text-lg font-bold fill-primary" style="font-size: 14px;">INDIA</text>
+                            
+                            <!-- Dhanbad Point (Animated) -->
+                            <circle cx="220" cy="200" r="8" fill="#dc2626" class="map-point"/>
+                            <text x="220" y="225" text-anchor="middle" class="text-xs font-semibold fill-secondary" style="font-size: 10px;">Dhanbad</text>
+                            
+                            <!-- Random Points -->
+                            <circle cx="180" cy="180" r="3" fill="#2563eb"/>
+                            <circle cx="240" cy="160" r="3" fill="#2563eb"/>
+                            <circle cx="160" cy="220" r="3" fill="#2563eb"/>
+                            <circle cx="250" cy="240" r="3" fill="#2563eb"/>
+                            <circle cx="150" cy="260" r="3" fill="#2563eb"/>
+                            <circle cx="270" cy="200" r="3" fill="#2563eb"/>
+                            <circle cx="130" cy="300" r="3" fill="#2563eb"/>
+                            <circle cx="280" cy="280" r="3" fill="#2563eb"/>
+                            <circle cx="200" cy="320" r="3" fill="#2563eb"/>
+                            <circle cx="120" cy="180" r="3" fill="#2563eb"/>
+                            <circle cx="300" cy="180" r="3" fill="#2563eb"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="reveal inline-block text-secondary font-semibold mb-3">MILESTONES</span>
+                <h2 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl font-bold text-primary mb-4">Our Achievements</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="reveal achievement-card">
+                    <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-primary mb-2">Best Institute Award</h3>
+                    <p class="text-gray-600">Awarded for excellence in IT training for 3 consecutive years.</p>
+                </div>
+                <div class="reveal reveal-delay-1 achievement-card">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-primary mb-2">ISO Certified</h3>
+                    <p class="text-gray-600">Internationally recognized quality management standards.</p>
+                </div>
+                <div class="reveal reveal-delay-2 achievement-card">
+                    <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-primary mb-2">5000+ Placements</h3>
+                    <p class="text-gray-600">Successfully placed students in top MNCs across India.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Placed Heroes Section -->
+    <section id="placed-heroes" class="py-20 bg-white relative overflow-hidden">
+        <canvas id="confettiCanvas" class="celebration-canvas"></canvas>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="reveal inline-block text-secondary font-semibold mb-3">SUCCESS STORIES</span>
+                <h2 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl font-bold text-primary mb-4">Our Placed Heroes</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="placedHeroesGrid"></div>
+        </div>
+    </section>
+
+    <!-- Recently Joined Students -->
+    <section class="py-20 bg-gray-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="reveal inline-block text-secondary font-semibold mb-3">GROWING FAMILY</span>
+                <h2 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl font-bold text-primary mb-4">Recently Joined Students</h2>
+            </div>
+            <div class="overflow-hidden">
+                <div class="student-scroll" id="studentScroll"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enrollment Section -->
+    <section id="enrollment" class="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="reveal">
+                    <span class="inline-block text-secondary font-semibold mb-3">ENROLL NOW</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary mb-6">Start Your IT Journey Today</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center"><svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+                            <span class="text-gray-700">Industry-recognized certifications</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center"><svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+                            <span class="text-gray-700">Hands-on practical training</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center"><svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+                            <span class="text-gray-700">Placement assistance</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <form id="enrollmentForm" class="bg-white p-8 rounded-2xl shadow-xl" onsubmit="handleEnrollment(event)">
+                        <h3 class="font-display text-xl font-semibold text-primary mb-6">Student Registration</h3>
+                        <div class="space-y-4">
+                            <div><label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label><input type="text" name="name" class="form-input" placeholder="Enter your full name" required></div>
+                            <div><label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label><input type="email" name="email" class="form-input" placeholder="Enter your email" required></div>
+                            <div><label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label><input type="tel" name="phone" class="form-input" placeholder="Enter your phone number" required></div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Select Course *</label>
+                                <select name="course" class="form-input" required>
+                                    <option value="">Choose a course</option>
+                                    <option value="Web Development">Web Development</option>
+                                    <option value="Python MySQL">Python MySQL</option>
+                                    <option value="CCNA">CCNA</option>
+                                    <option value="Cloud Computing">Cloud Computing</option>
+                                    <option value="AI">Artificial Intelligence</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary w-full justify-center">Submit Enrollment <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="reveal inline-block text-secondary font-semibold mb-3">FAQ</span>
+                <h2 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl font-bold text-primary mb-4">Frequently Asked Questions</h2>
+            </div>
+            <div class="reveal reveal-delay-2 space-y-4" id="faqContainer"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="reveal inline-block text-secondary font-semibold mb-3">CONTACT US</span>
+                <h2 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl font-bold text-primary mb-4">Get in Touch</h2>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="reveal">
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <div class="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+                            <div><h3 class="font-display font-semibold text-lg text-primary mb-1">Our Address</h3><p class="text-gray-600">Rahmat Ganj, Bhuli, Dhanbad - 828130, Jharkhand</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
+                            <div><h3 class="font-display font-semibold text-lg text-primary mb-1">Phone Number</h3><a href="tel:7858838866" class="text-gray-600 hover:text-secondary transition-colors">7858838866</a></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-14 h-14 bg-emerald-500/10 rounded-xl flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+                            <div><h3 class="font-display font-semibold text-lg text-primary mb-1">Email Address</h3><a href="mailto:gwit.dhanbad@gmail.com" class="text-gray-600 hover:text-secondary transition-colors">gwit.dhanbad@gmail.com</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <div class="rounded-2xl overflow-hidden shadow-xl h-96">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3639.5!2d86.42!3d23.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQ4JzAwLjAiTiA4NsKwMjUnMTIuMCJF!5e0!3m2!1sen!2sin!4v1234567890!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="GWIT Location Map"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-secondary to-red-400 rounded-xl flex items-center justify-center"><span class="text-white font-display font-bold text-xl">GW</span></div>
+                        <div><span class="text-white font-display font-bold text-xl">GWIT</span><span class="block text-xs text-gray-400">Global Web Institute of Technology</span></div>
+                    </div>
+                    <p class="text-gray-400 mb-6">Premier IT training institute providing quality education in Dhanbad, Jharkhand.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#courses" class="text-gray-400 hover:text-white transition-colors">Courses</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold text-lg mb-6">Our Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Website Development</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">IT Network Support</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Hardware Solutions</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Cloud Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold text-lg mb-6">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex gap-3"><svg class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span class="text-gray-400">Rahmat Ganj, Bhuli, Dhanbad - 828130</span></li>
+                        <li class="flex gap-3"><svg class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><a href="tel:7858838866" class="text-gray-400 hover:text-white transition-colors">7858838866</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400 text-sm">&copy; 2024 GWIT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Course Modal -->
+    <div class="modal-overlay" id="courseModal">
+        <div class="modal-content">
+            <button onclick="closeCourseModal()" class="absolute top-4 right-4 w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors z-10" aria-label="Close modal">
+                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-6 py-3 rounded-full shadow-lg z-50 opacity-0 invisible transition-all duration-300 flex items-center gap-3">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        <span id="toastMessage">Form submitted successfully!</span>
+    </div>
+
+    <script>
+        // Data Initialization
+        const courses = [
+            { id: 1, name: 'Web Development', duration: '6 Months', fee: '15,000', image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=250&fit=crop', description: 'Master HTML, CSS, JavaScript, React, Node.js, WordPress, Zoho, Google Form and build real-world web applications.', category: 'advanced' },
+            { id: 2, name: 'Python MySQL', duration: '4 Months', fee: '12,000', image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=250&fit=crop', description: 'Learn Python programming with database integration using MySQL.', category: 'advanced' },
+            { id: 3, name: 'Hardware', duration: '3 Months', fee: '8,000', image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400&h=250&fit=crop', description: 'Computer hardware assembly, troubleshooting, and maintenance.', category: 'basic' },
+            { id: 4, name: 'Networking', duration: '4 Months', fee: '10,000', image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop', description: 'Network fundamentals, LAN/WAN setup, and network security basics.', category: 'basic' },
+            { id: 5, name: 'CCNA', duration: '4 Months', fee: '15,000', image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop', description: 'Cisco Certified Network Associate - routing, switching, and configuration.', category: 'advanced' },
+            { id: 6, name: 'Cloud Computing', duration: '5 Months', fee: '20,000', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop', description: 'AWS, Azure, and Google Cloud Platform - deployment and management.', category: 'advanced' },
+            { id: 7, name: 'AI', duration: '6 Months', fee: '25,000', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop', description: 'Artificial Intelligence and Machine Learning fundamentals.', category: 'advanced' }
+        ];
+
+        const faqs = [
+            { question: 'What are the admission requirements?', answer: 'Basic computer knowledge is preferred but not mandatory. We welcome students from all educational backgrounds.' },
+            { question: 'Do you provide placement assistance?', answer: 'Yes, we have a dedicated placement cell that helps students with resume building and interview preparation.' },
+            { question: 'What is the duration of courses?', answer: 'Course duration varies from 2 months to 6 months depending on the complexity.' }
+        ];
+
+        const students = [
+            { name: 'Rahul Kumar', course: 'Web Development', image: 'https://randomuser.me/api/portraits/men/1.jpg' },
+            { name: 'Priya Singh', course: 'Python MySQL', image: 'https://randomuser.me/api/portraits/women/2.jpg' },
+            { name: 'Amit Das', course: 'CCNA', image: 'https://randomuser.me/api/portraits/men/3.jpg' },
+            { name: 'Neha Sharma', course: 'Tally Prime', image: 'https://randomuser.me/api/portraits/women/4.jpg' },
+            { name: 'Vikram Patel', course: 'Cloud Computing', image: 'https://randomuser.me/api/portraits/men/5.jpg' },
+            { name: 'Anjali Gupta', course: 'AI', image: 'https://randomuser.me/api/portraits/women/6.jpg' }
+        ];
+
+        const placedHeroes = [
+            { name: 'Ravi Shankar', course: 'Web Dev', company: 'Google', package: '12 LPA', image: 'https://randomuser.me/api/portraits/men/11.jpg' },
+            { name: 'Sneha Roy', course: 'Data Science', company: 'Amazon', package: '15 LPA', image: 'https://randomuser.me/api/portraits/women/12.jpg' },
+            { name: 'Amit Kumar', course: 'Cloud Computing', company: 'Microsoft', package: '14 LPA', image: 'https://randomuser.me/api/portraits/men/13.jpg' },
+            { name: 'Pooja Singh', course: 'Networking', company: 'TCS', package: '8 LPA', image: 'https://randomuser.me/api/portraits/women/14.jpg' }
+        ];
+
+        // Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCourses();
+            renderFAQs();
+            renderStudents();
+            renderPlacedHeroes();
+            createParticles();
+            initScrollAnimations();
+            initStickyHeader();
+            initCelebrationEffect();
+        });
+
+        // Render Functions
+        function renderCourses() {
+            const grid = document.getElementById('coursesGrid');
+            if (!grid) return;
+            grid.innerHTML = courses.map((course, index) => `
+                <div class="reveal ${index % 4 === 1 ? 'reveal-delay-1' : index % 4 === 2 ? 'reveal-delay-2' : index % 4 === 3 ? 'reveal-delay-3' : ''}">
+                    <div class="course-card h-full flex flex-col">
+                        <div class="course-image relative h-48">
+                            <img src="${course.image}" alt="${course.name}" class="w-full h-full object-cover">
+                            <div class="absolute bottom-3 left-3 right-3 z-10">
+                                <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur text-white text-xs rounded-full">${course.category === 'advanced' ? 'Advance Course' : 'Basic Course'}</span>
+                            </div>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col">
+                            <h3 class="font-display font-semibold text-lg text-primary mb-2">${course.name}</h3>
+                            <p class="text-gray-600 text-sm mb-4 flex-1">${course.description}</p>
+                            <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>${course.duration}</span>
+                                <span class="font-semibold text-secondary">Rs. ${course.fee}</span>
+                            </div>
+                            <button onclick="openCourseModal(${course.id})" class="btn-primary w-full justify-center text-sm py-3">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderFAQs() {
+            const container = document.getElementById('faqContainer');
+            if (!container) return;
+            container.innerHTML = faqs.map((faq, index) => `
+                <div class="faq-item" data-faq="${index}">
+                    <div class="faq-question" onclick="toggleFAQ(${index})">
+                        <span>${faq.question}</span>
+                        <svg class="faq-icon w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </div>
+                    <div class="faq-answer"><div class="px-6 pb-4 text-gray-600">${faq.answer}</div></div>
+                </div>
+            `).join('');
+        }
+
+        function renderStudents() {
+            const container = document.getElementById('studentScroll');
+            if (!container) return;
+            const duplicatedStudents = [...students, ...students];
+            container.innerHTML = duplicatedStudents.map(student => `
+                <div class="student-card">
+                    <img src="${student.image}" alt="${student.name}" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-white shadow">
+                    <h4 class="font-semibold text-primary">${student.name}</h4>
+                    <p class="text-sm text-gray-500">${student.course}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderPlacedHeroes() {
+            const container = document.getElementById('placedHeroesGrid');
+            if (!container) return;
+            container.innerHTML = placedHeroes.map((hero, index) => `
+                <div class="reveal ${index % 2 === 0 ? '' : 'reveal-delay-1'}">
+                    <div class="placed-hero-card text-center p-6">
+                        <div class="relative inline-block mb-4">
+                            <img src="${hero.image}" alt="${hero.name}" class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-amber-400 shadow-lg">
+                            <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center shadow">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-semibold text-primary text-lg">${hero.name}</h4>
+                        <p class="text-sm text-gray-500 mb-2">${hero.course}</p>
+                        <div class="bg-primary text-white text-xs py-1 px-3 rounded-full inline-block mb-2">${hero.company}</div>
+                        <p class="text-lg font-bold text-secondary">${hero.package}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Animations & Effects
+        function createParticles() {
+            const container = document.getElementById('particles');
+            if (!container) return;
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        function initStickyHeader() {
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            });
+        }
+
+        // Confetti Celebration Effect
+        function initCelebrationEffect() {
+            const canvas = document.getElementById('confettiCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+
+            function resizeCanvas() {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            function createConfetti() {
+                particles = [];
+                const colors = ['#dc2626', '#2563eb', '#fbbf24', '#10b981', '#8b5cf6'];
+                for (let i = 0; i < 150; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: -20 - Math.random() * 100,
+                        w: Math.random() * 10 + 5,
+                        h: Math.random() * 6 + 3,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        speed: Math.random() * 3 + 2,
+                        angle: Math.random() * Math.PI * 2,
+                        spin: (Math.random() - 0.5) * 0.2
+                    });
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let active = false;
+                particles.forEach(p => {
+                    p.y += p.speed;
+                    p.x += Math.sin(p.angle) * 0.5;
+                    p.angle += p.spin;
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.angle);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                    ctx.restore();
+                    if (p.y < canvas.height) active = true;
+                });
+                if (active) requestAnimationFrame(animate);
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        createConfetti();
+                        animate();
+                    }
+                });
+            }, { threshold: 0.3 });
+            observer.observe(document.getElementById('placed-heroes'));
+        }
+
+        // Interactions
+        function toggleFAQ(index) {
+            const items = document.querySelectorAll('.faq-item');
+            items.forEach((item, i) => {
+                if (i === index) item.classList.toggle('active');
+                else item.classList.remove('active');
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileOverlay');
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function toggleMobileDropdown(button) {
+            const dropdownMenu = button.nextElementSibling;
+            const icon = button.querySelector('svg');
+            
+            dropdownMenu.classList.toggle('open');
+            
+            if (dropdownMenu.classList.contains('open')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Modals
+        function openCourseModal(courseId) {
+            const course = courses.find(c => c.id === courseId);
+            if (!course) return;
+            const modal = document.getElementById('courseModal');
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <div class="relative h-48">
+                    <img src="${course.image}" alt="${course.name}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="inline-block px-3 py-1 bg-secondary text-white text-xs rounded-full mb-2">${course.category === 'advanced' ? 'Advance Course' : 'Basic Course'}</span>
+                        <h2 class="font-display text-2xl font-bold text-white">${course.name}</h2>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-600 mb-6">${course.description}</p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-gray-50 p-4 rounded-xl text-center"><span class="block text-gray-500 text-sm">Duration</span><span class="font-semibold text-primary">${course.duration}</span></div>
+                        <div class="bg-gray-50 p-4 rounded-xl text-center"><span class="block text-gray-500 text-sm">Course Fee</span><span class="font-semibold text-secondary">Rs. ${course.fee}</span></div>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="font-semibold text-primary mb-3">Payment QR Code</h3>
+                        <div class="bg-white border-2 border-gray-100 rounded-xl p-4 w-48 mx-auto"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=gwit.dhanbad@upi" alt="Payment QR" class="w-full"></div>
+                    </div>
+                    <div class="flex gap-3">
+                        <a href="#enrollment" onclick="closeCourseModal()" class="btn-primary flex-1 justify-center">Register Now</a>
+                        <a href="tel:7858838866" class="flex items-center justify-center gap-2 px-6 bg-gray-100 rounded-full text-primary font-semibold hover:bg-gray-200 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>Call</a>
+                    </div>
+                </div>
+            `;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openEnrollModal() {
+            const modal = document.getElementById('courseModal');
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <div class="p-6">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary to-red-400 rounded-2xl flex items-center justify-center mx-auto mb-4"><span class="text-white font-display font-bold text-2xl">GW</span></div>
+                        <h2 class="font-display text-2xl font-bold text-primary">Enroll Now</h2>
+                    </div>
+                    <form onsubmit="handleQuickEnroll(event)">
+                        <div class="space-y-4">
+                            <div><input type="text" name="name" class="form-input" placeholder="Full Name *" required></div>
+                            <div><input type="tel" name="phone" class="form-input" placeholder="Phone Number *" required></div>
+                            <div><input type="email" name="email" class="form-input" placeholder="Email Address *" required></div>
+                            <div>
+                                <select name="course" class="form-input" required>
+                                    <option value="">Select Course *</option>
+                                    ${courses.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary w-full justify-center">Submit Enrollment</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCourseModal() {
+            const modal = document.getElementById('courseModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('courseModal').addEventListener('click', function(e) {
+            if (e.target === this) closeCourseModal();
+        });
+
+        // Forms
+        function handleEnrollment(event) {
+            event.preventDefault();
+            showToast('Enrollment submitted successfully!');
+            event.target.reset();
+        }
+
+        function handleQuickEnroll(event) {
+            event.preventDefault();
+            closeCourseModal();
+            showToast('Enrollment submitted! We will contact you within 24 hours.');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('successToast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.style.opacity = '1';
+            toast.style.visibility = 'visible';
+            setTimeout(() => { toast.style.opacity = '0'; toast.style.visibility = 'hidden'; }, 4000);
+        }
+    </script>
+</body>
+</html>
